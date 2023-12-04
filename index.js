@@ -1,20 +1,25 @@
 const http = require('http');
+const {run,upload,retrieve,clearCollection} = require('./connect');
 
 const server = http.createServer((req, res) => {
-  // Set the response headers
   res.writeHead(200, { 'Content-Type': 'text/plain' });
 
-  // Send a simple text response
-  res.end('Hello, World! This is a basic Node.js server.');
+const urlPath = req.url;
 
-  // Log the request method and URL for demonstration purposes
+if (urlPath === '/') {
+  res.end('Hello, World! This is the root route.');
+} else if (urlPath === '/api') {
+    // await run();
+    res.end('Hello, World! This is the /api route.');
+} else {
+  res.writeHead(404, { 'Content-Type': 'text/plain' });
+  res.end('404 Not Found');
+}
   console.log(`${req.method} request received for ${req.url}`);
 });
 
-// Specify the port the server should listen on
 const port = 3000;
 
-// Start the server and listen on the specified port
 server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
