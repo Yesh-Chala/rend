@@ -16,7 +16,6 @@ if (urlPath === '/') {
     res.end(JSON.stringify(results));
     // res.end('Hello, World! This is the /api route.');
 } else {
-  res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('404 Not Found');
 }
   console.log(`${req.method} request received for ${req.url}`);
