@@ -1,7 +1,7 @@
 const http = require('http');
 const {run,upload,retrieve,clearCollection} = require('./connect');
 
-const server = http.createServer((req, res) => {
+const server = http.createServer( async (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
 
 const urlPath = req.url;
@@ -9,8 +9,10 @@ const urlPath = req.url;
 if (urlPath === '/') {
   res.end('Hello, World! This is the root route.');
 } else if (urlPath === '/api') {
-    // await run();
-    res.end('Hello, World! This is the /api route.');
+    await run();
+    results = await retrieve();
+    res.end(JSON.stringify(results));
+    // res.end('Hello, World! This is the /api route.');
 } else {
   res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('404 Not Found');
