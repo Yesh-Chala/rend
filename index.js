@@ -10,6 +10,8 @@ if (urlPath === '/') {
   res.end('Hello, World! This is the root route.');
 } else if (urlPath === '/api') {
     await run();
+    // await upload();
+    // await clearCollection();
     results = await retrieve();
     res.end(JSON.stringify(results));
     // res.end('Hello, World! This is the /api route.');
